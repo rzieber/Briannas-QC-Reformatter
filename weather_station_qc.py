@@ -54,6 +54,7 @@ def normalize_time_column(series: pd.Series, source_timezone: str) -> pd.Series:
 def identify_unmapped_columns(raw_columns: list[str], config: StationMappingConfig) -> list[str]:
     allowed = set(REQUIRED_COLUMNS)
     allowed.update(config.column_mapping.keys())
+    allowed.update(config.raw_input_columns)
     allowed.update(config.drop_columns)
     allowed.update(config.passthrough_columns)
     allowed.add(config.time_column)
@@ -75,11 +76,14 @@ def apply_station_mapping(raw_df: pd.DataFrame, config: StationMappingConfig) ->
     if drop_columns:
         df = df.drop(columns=drop_columns)
 
-    rename_map = dict(config.column_mapping)
-    if config.time_column != "time":
-        rename_map[config.time_column] = "time"
+    if config.dataframe_transform is not None:
+        df = config.dataframe_transform(df)
+    else:
+        rename_map = dict(config.column_mapping)
+        if config.time_column != "time":
+            rename_map[config.time_column] = "time"
+        df = df.rename(columns=rename_map)
 
-    df = df.rename(columns=rename_map)
     df["time"] = normalize_time_column(df["time"], config.source_timezone)
     return df
 

@@ -20,9 +20,9 @@ Workflow:
 4. Save one pickle per station, with `time` as the first data column.
 """
 
-data = Path("")
-csv_export = Path("")
-pickle_export = Path("")
+data            = Path("/Users/rzieber/Documents/3D-PAWS/Briannas_Reformatting/data/raw/csvs")
+csv_export      = Path("/Users/rzieber/Documents/3D-PAWS/Briannas_Reformatting/test-reformatted")
+pickle_export   = Path("/Users/rzieber/Documents/3D-PAWS/Briannas_Reformatting/test-pickles")
 
 with warnings.catch_warnings():
     warnings.simplefilter("ignore", category=UserWarning)
