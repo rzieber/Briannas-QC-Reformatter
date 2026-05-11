@@ -1,8 +1,8 @@
 # Summary
 This is a codebase used to reformat 3D-PAWS data collected from the Particle datalogger 
-by renaming columns to a specific convention for use in Brianna's QC procedure. <br>
+by renaming columns to a specific convention for use in a particular QC procedure. <br>
 <br>
-The columns necessary for Brianna's QC are as follows:
+The columns necessary for QC are as follows:
   - time
   - bmp180_tempC
   - bmp180_station_P
